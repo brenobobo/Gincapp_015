@@ -1,4 +1,4 @@
-package com.example.gincapp_015;
+package com.example.gincapp_015.Activitys;
 
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
@@ -6,9 +6,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.gincapp_015.Fragments.ConvidadoFragment;
 import com.example.gincapp_015.Fragments.MainFragment;
+import com.example.gincapp_015.Adapter.ViewPagerAdapter;
+import com.example.gincapp_015.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.include_toolbar);
         setSupportActionBar(toolbar);
+
         tabLayout = findViewById(R.id.tabs);
 
 
@@ -44,6 +50,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_sair:
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
     }
 }

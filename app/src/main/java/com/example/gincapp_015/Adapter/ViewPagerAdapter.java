@@ -1,4 +1,4 @@
-package com.example.gincapp_015;
+package com.example.gincapp_015.Adapter;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
