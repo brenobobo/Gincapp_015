@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pradrao_campo_width">214dp</dimen>
+    <dimen name="padrao_caompo_height">39dp</dimen>
+
+</resources>

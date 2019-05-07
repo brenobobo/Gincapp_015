@@ -1,5 +1,6 @@
 package com.example.gincapp_015.Activitys;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,7 @@ import com.example.gincapp_015.Fragments.ConvidadoFragment;
 import com.example.gincapp_015.Fragments.MainFragment;
 import com.example.gincapp_015.Adapter.ViewPagerAdapter;
 import com.example.gincapp_015.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private AppBarLayout appBarLayout;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +68,18 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.menu_sair:
+                deslogarUsuario();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    public void deslogarUsuario(){
+        firebaseAuth.signOut();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 }
