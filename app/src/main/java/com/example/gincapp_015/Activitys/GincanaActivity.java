@@ -3,6 +3,9 @@ package com.example.gincapp_015.Activitys;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,10 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gincapp_015.Adapter.EquipeAdapter;
+import com.example.gincapp_015.Control.Base64Custom;
 import com.example.gincapp_015.Control.ConfiguracaoFirebase;
+import com.example.gincapp_015.Control.ControlConvidadoGincana;
 import com.example.gincapp_015.Control.ControlEquipe;
+import com.example.gincapp_015.Entidades.ConvidadoGincana;
 import com.example.gincapp_015.Entidades.Equipe;
 import com.example.gincapp_015.R;
 import com.google.firebase.database.DataSnapshot;
@@ -237,5 +244,81 @@ public class GincanaActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_convidado, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menu_convidar:
+                convidarUsuario();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    public void convidarUsuario(){
+        android.app.AlertDialog.Builder alertDialog = new android.app.AlertDialog.Builder(GincanaActivity.this);
+        alertDialog.setTitle("Digite o email do convidado");
+        final EditText emailUsuario = new EditText(GincanaActivity.this);
+        alertDialog.setView(emailUsuario);
+        alertDialog.setPositiveButton("Convidar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String emailConvidado = emailUsuario.getText().toString();
+
+                if (emailConvidado.isEmpty()){
+                    Toast.makeText(GincanaActivity.this, "Preencha uma e-mail", Toast.LENGTH_LONG).show();
+                }else {
+                    //Verificar se o usuario está cadastrado no app
+                    identificadorUsuario = Base64Custom.codificarBase64(emailConvidado);
+                    firebase = ConfiguracaoFirebase.getFirebase().child("Usuario").child(identificadorUsuario);
+
+                    firebase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.getValue() != null ){
+
+                                ConvidadoGincana convidado = new ConvidadoGincana();
+                                convidado.setIdConvidado(identificadorUsuario);
+                                convidado.setEmail(emailConvidado);
+                                convidado.setNomeDaGincana(nomeDaGincana);
+                                convidado.setChaveamento(chaveamento);
+                                convidado.setIdDaGincana(idDaGincana);
+
+                                ControlConvidadoGincana controlConvidadoGincana = new ControlConvidadoGincana();
+                                controlConvidadoGincana.salvarConvidadoGincana(convidado);
+
+
+
+
+
+                            }else{
+                                Toast.makeText(GincanaActivity.this, "Não existe esse email cadastrado", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+            }
+        });
+
+        alertDialog.show();
     }
 }

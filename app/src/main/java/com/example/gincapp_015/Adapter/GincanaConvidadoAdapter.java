@@ -9,20 +9,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.gincapp_015.Entidades.ConvidadoGincana;
 import com.example.gincapp_015.Entidades.Gincana;
 import com.example.gincapp_015.R;
 
 import java.util.ArrayList;
 
-public class GincanaAdapter extends ArrayAdapter<Gincana> {
+public class GincanaConvidadoAdapter extends ArrayAdapter<ConvidadoGincana> {
 
-    private ArrayList<Gincana> gincanas;
+    private ArrayList<ConvidadoGincana> convidadoGincanas;
     private Context context;
 
-
-    public GincanaAdapter(@NonNull Context c, @NonNull ArrayList<Gincana> objects) {
+    public GincanaConvidadoAdapter(@NonNull Context c, @NonNull ArrayList<ConvidadoGincana> objects) {
         super(c, 0, objects);
-        this.gincanas = objects;
+        this.convidadoGincanas = objects;
         this.context = c;
     }
 
@@ -31,17 +31,17 @@ public class GincanaAdapter extends ArrayAdapter<Gincana> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = null;
 
-        if (gincanas != null ){
+        if (convidadoGincanas != null ){
 
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
 
-            view = inflater.inflate(R.layout.lista_gincana,parent, false);
+            view = inflater.inflate(R.layout.lista_convida_gincana,parent, false);
 
-            TextView nomeGincana = view.findViewById(R.id.tv_nome);
+            TextView nomeGincana = view.findViewById(R.id.tv_nome_convidado_gincana);
 
-            Gincana gincana = gincanas.get(position);
+            ConvidadoGincana convidadoGincana = convidadoGincanas.get(position);
 
-            nomeGincana.setText(gincana.getNome());
+            nomeGincana.setText(convidadoGincana.getNomeDaGincana());
 
 
 
@@ -50,4 +50,6 @@ public class GincanaAdapter extends ArrayAdapter<Gincana> {
         }
         return view;
     }
+
+
 }

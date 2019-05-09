@@ -12,6 +12,6 @@ public class ControlConvidadoGincana {
 
 
         DatabaseReference referenceFirebase = ConfiguracaoFirebase.getFirebase();
-        referenceFirebase.child("ConvidadoGincana").child(convidadoGincana.getIdDaGincana()).child(convidadoGincana.getIdConvidado()).setValue(convidadoGincana);
+        referenceFirebase.child("ConvidadoGincana").child(convidadoGincana.getIdConvidado()).child(convidadoGincana.getIdDaGincana()).setValue(convidadoGincana);
     }
 }
