@@ -134,6 +134,7 @@ public class MainFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Gincana gincana = gincanas.get(position);
 
+
                 String valor = gincana.getChaveamento();
 
                 if (valor.equals("Semi-Final")){
@@ -173,13 +174,13 @@ public class MainFragment extends Fragment {
                 alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        ControlGincana control = new ControlGincana();
+                        ControlGincana controlGincana = new ControlGincana();
 
                         Gincana g = gincanas.get(position);
 
-                        control.excluirGincana(g.getId());
 
-
+                        controlGincana.excluirEquipeDaGincana(g.getIdUsuario());
+                        controlGincana.excluirGincana(g.getId());
 
                     }
 

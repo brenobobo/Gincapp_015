@@ -24,4 +24,9 @@ public class ControlGincana {
         DatabaseReference referenceFirebase = ConfiguracaoFirebase.getFirebase();
         referenceFirebase.child("Gincana").child(emailCodificado).child(id).removeValue();
     }
+
+    public void excluirEquipeDaGincana(String idGincana){
+        DatabaseReference referenceFirebase = ConfiguracaoFirebase.getFirebase();
+        referenceFirebase.child("Equipe").child(idGincana).removeValue();
+    }
 }

@@ -24,4 +24,6 @@ public class ControlEquipe {
         DatabaseReference referenceFirebase = ConfiguracaoFirebase.getFirebase();
         referenceFirebase.child("Equipe").child(equipe.getIdGincana()).child(id).setValue(equipe);
     }
+
+
 }

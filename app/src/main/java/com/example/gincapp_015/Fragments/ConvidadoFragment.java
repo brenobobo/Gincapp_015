@@ -1,6 +1,9 @@
 package com.example.gincapp_015.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,9 +13,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.gincapp_015.Activitys.GincanaConvidadoActivity;
+import com.example.gincapp_015.Activitys.SemiFinalActivity;
 import com.example.gincapp_015.Adapter.GincanaAdapter;
 import com.example.gincapp_015.Adapter.GincanaConvidadoAdapter;
 import com.example.gincapp_015.Control.ConfiguracaoFirebase;
+import com.example.gincapp_015.Control.ControlConvidadoGincana;
 import com.example.gincapp_015.Control.ControlUsuario;
 import com.example.gincapp_015.Entidades.ConvidadoGincana;
 import com.example.gincapp_015.Entidades.Gincana;
@@ -61,7 +67,7 @@ public class ConvidadoFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
@@ -118,9 +124,44 @@ public class ConvidadoFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ConvidadoGincana convidadoGincana = convidadoGincanas.get(position);
+                String valor = convidadoGincana.getChaveamento();
 
 
 
+                if (valor.equals("Pontos corridos")){
+
+                    Intent intent = new Intent(getContext(), GincanaConvidadoActivity.class);
+                    intent.putExtra("nome", convidadoGincana.getNomeDaGincana());
+                    intent.putExtra("idGincana", convidadoGincana.getIdDaGincana());
+                    intent.putExtra("emailConvidou", convidadoGincana.getEmailConvidou());
+                    startActivity(intent);
+
+
+                }
+
+
+
+            }
+        });
+
+        listViewConvidadosGincanas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setTitle("Você deseja se desconvidar?");
+
+                alertDialog.setPositiveButton("Sim" , new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ControlConvidadoGincana controlConvidadoGincana = new ControlConvidadoGincana();
+                        ConvidadoGincana convidadoGincana = convidadoGincanas.get(position);
+
+                        controlConvidadoGincana.excluirGincana(convidadoGincana);
+                    }
+                });
+
+                return true;
             }
         });
 

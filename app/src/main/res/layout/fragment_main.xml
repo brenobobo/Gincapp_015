@@ -7,23 +7,6 @@
     android:layout_gravity="center"
     tools:context=".Fragments.MainFragment">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton_addGincana"
-        android:layout_width="73dp"
-        android:layout_height="71dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:layout_marginBottom="52dp"
-        android:clickable="true"
-        android:src="@drawable/ic_action_add"
-        app:backgroundTint="@color/colorSecondary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.929"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ListView
         android:id="@+id/listViewGincanasId"
         android:layout_width="match_parent"
@@ -32,8 +15,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabs" >
+        app:layout_constraintTop_toBottomOf="@+id/tabs">
 
     </ListView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton_addGincana"
+        android:layout_width="57dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="51dp"
+        android:layout_marginRight="51dp"
+        android:layout_marginBottom="65dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add"
+        app:backgroundTint="@color/colorSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

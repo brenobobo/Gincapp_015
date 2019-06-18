@@ -20,6 +20,7 @@ import com.example.gincapp_015.Control.Base64Custom;
 import com.example.gincapp_015.Control.ConfiguracaoFirebase;
 import com.example.gincapp_015.Control.ControlConvidadoGincana;
 import com.example.gincapp_015.Control.ControlEquipe;
+import com.example.gincapp_015.Control.ControlUsuario;
 import com.example.gincapp_015.Entidades.ConvidadoGincana;
 import com.example.gincapp_015.Entidades.Equipe;
 import com.example.gincapp_015.R;
@@ -30,6 +31,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.UUID;
 
 public class GincanaActivity extends AppCompatActivity {
@@ -81,7 +84,8 @@ public class GincanaActivity extends AppCompatActivity {
 
         }
 
-//toolbar
+        //toolbar
+
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(nomeDaGincana);
         setSupportActionBar(toolbar);
@@ -162,6 +166,9 @@ public class GincanaActivity extends AppCompatActivity {
                     Equipe equipe = dados.getValue(Equipe.class);
 
                     equipes.add(equipe);
+
+
+                    Collections.reverse(equipes);
 
 
 
@@ -289,12 +296,16 @@ public class GincanaActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             if (dataSnapshot.getValue() != null ){
 
+                                ControlUsuario controlUsuario = new ControlUsuario();
+                                String emailConvidou = controlUsuario.recoverEmailBase64();
+
                                 ConvidadoGincana convidado = new ConvidadoGincana();
                                 convidado.setIdConvidado(identificadorUsuario);
-                                convidado.setEmail(emailConvidado);
+                                convidado.setEmailConvidado(emailConvidado);
                                 convidado.setNomeDaGincana(nomeDaGincana);
                                 convidado.setChaveamento(chaveamento);
                                 convidado.setIdDaGincana(idDaGincana);
+                                convidado.setEmailConvidou(emailConvidou);
 
                                 ControlConvidadoGincana controlConvidadoGincana = new ControlConvidadoGincana();
                                 controlConvidadoGincana.salvarConvidadoGincana(convidado);

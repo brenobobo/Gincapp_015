@@ -44,7 +44,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         senha = findViewById(R.id.editText_cadastroSenha);
         confirmarSenha = findViewById(R.id.editText_confirmarSenha);
         cadastrar = findViewById(R.id.button_cadastrar);
-        teste = findViewById(R.id.textView_teste);
 
         cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override

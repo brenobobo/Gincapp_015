@@ -3,12 +3,22 @@ package com.example.gincapp_015.Entidades;
 public class ConvidadoGincana {
     private String idConvidado;
     private String idDaGincana;
-    private String email;
+    private String emailConvidado;
     private String nomeDaGincana;
     private String chaveamento;
+    private String emailConvidou;
+
+
 
 
     public ConvidadoGincana() {
+    }
+    public String getEmailConvidou() {
+        return emailConvidou;
+    }
+
+    public void setEmailConvidou(String emailConvidou) {
+        this.emailConvidou = emailConvidou;
     }
 
     public String getIdConvidado() {
@@ -27,12 +37,12 @@ public class ConvidadoGincana {
         this.nomeDaGincana = nome;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailConvidado() {
+        return emailConvidado;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailConvidado(String email) {
+        this.emailConvidado = email;
     }
 
     public String getIdDaGincana() {
